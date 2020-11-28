@@ -1,0 +1,491 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="renderer" content="webkit" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+		
+	
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var Com_Parameter = {
+	ContextPath:"/",
+	ResPath:"/resource/",
+	Style:"default",
+	JsFileList:new Array,
+	StylePath:"/resource/style/default/",
+	Lang:"zh-cn",
+	CurrentUserId:"1552b017928bb0d85aafee649b29269b",
+	Cache:1605153291302,
+	FirstDayInWeek: parseInt('1') - 1,
+	CalendarMinuteStep: parseInt('1'),
+	SessionExpireTip:"会话过期，请打开新页面重新登录后再提交本页面。",
+	ServiceNotAvailTip:"与服务器连接不通，请联系系统管理员或等会再试。",
+	Date_format:"yyyy-MM-dd",
+	DateTime_format:"yyyy-MM-dd HH:mm",
+	SoftDeleteEnableModules:"",
+	ComfirmDelete:"一旦选择了删除，所选记录的相关数据都会被删除，无法恢复！您确认要执行此删除操作吗？",
+	ComfirmSoftDelete:"您确定要将所选记录放入回收站吗？<br>",
+	OptSuccessInfo:"您的操作已成功！",
+	OptFailureInfo:"操作失败！"
+};
+</script>
+<script type="text/javascript" src='/resource/js/domain.js?s_cache=1605153291302'></script>
+<script type="text/javascript" src='/sys/ui/js/LUI.js?s_cache=1605153291302'></script>
+<script type="text/javascript" src="/resource/js/common.js?s_cache=1605153291302"></script>
+<script type="text/javascript" src="/resource/js/sea.js?s_cache=1605153291302"></script>
+<script type="text/javascript">
+seajs.config({
+	themes : {
+    "icon": ["sys/ui/extend/theme/default/style/icon.css"],
+    "iconfont": ["sys/ui/extend/theme/default/style/iconfont.css"],
+    "module": ["sys/ui/extend/theme/default/style/module.css"],
+    "form": ["sys/ui/extend/theme/default/style/form.css"],
+    "common": ["sys/ui/extend/theme/default/style/common.css"],
+    "portal": ["sys/ui/extend/theme/default/style/portal.css"],
+    "listview": ["sys/ui/extend/theme/default/style/listview.css"],
+    "sns": ["sys/ui/extend/theme/default/style/sns.css"],
+    "chart": ["sys/ui/extend/theme/default/style/chart.css"],
+    "treefont": ["sys/ui/extend/theme/default/style/treefont.css"],
+    "dialog": ["sys/ui/extend/theme/default/style/dialog.css"],
+    "widget": ["sys/ui/extend/theme/default/style/widget.css"],
+    "step": ["sys/ui/extend/theme/default/style/step.css"],
+    "zone": ["sys/ui/extend/theme/default/style/zone.css"],
+    "profile": ["sys/ui/extend/theme/default/style/profile.css"],
+    "calendar": ["sys/ui/extend/theme/default/style/calendar.css"],
+    "prompt": ["sys/ui/extend/theme/default/style/listview.css"]
+},
+	paths: {
+		'lui': 'sys/ui/js'
+	},
+	alias: {
+		'lui/jquery': 'resource/js/jquery',
+		'lui/jquery-ui': 'resource/js/jquery-ui/jquery.ui'
+	},
+	preload: ['/resource/js/plugin-theme.js','/resource/js/plugin-lang.js'],
+	debug: true,
+ 	base: '',
+ 	env : {
+ 	 	contextPath: '',
+ 		now : '2020-11-28 23:27',
+ 		pageMaxWidth:'1215px',
+ 		pattern : {
+ 			date : 'yyyy-MM-dd',
+ 			datetime : 'yyyy-MM-dd HH:mm',
+ 			time : 'HH:mm'
+ 		},
+ 		locale : "zh-cn",
+ 		config : {},
+ 		cache : 1605153291302
+ 	}
+});
+seajs.use([ 'lui/parser', 'lui/jquery', 'theme!common', 'theme!icon','theme!iconfont' ],
+	function(parser, $) {
+		$(document).ready(function() {
+			parser.parse();
+		});
+	}); 
+</script>
+
+
+<link rel="shortcut icon" href="/resource/customization/images/login_single_random/16f41c9bca9118d04821d704f10a24e0.png">
+
+
+        <link type="text/css" rel="stylesheet" href="/resource/style/default/login_single_random/css/login.css?s_cache=1605153291302" />
+        <link type="text/css" rel="stylesheet" href="/resource/style/default/login_single_random/css/animate.css?s_cache=1605153291302" />
+		<style>
+			.lui_login_button_td .lui_login_button_div_l {
+				background-color:#2a88f6;
+				border-color:#2a88f6;
+				color:#ffffff;
+			}
+			.lui_login_button_td .lui_login_button_div_l:hover {
+				background-color:#2460cc;
+				border-color:#2460cc;
+			}
+		</style>
+		<script>
+			Com_IncludeFile("jquery.js");
+			Com_IncludeFile("jquery.fullscreenr.js|custom.js", "style/default/login_single_random/js/");
+		</script>
+ 	
+<script type="text/javascript">
+	function checkLocation(){
+		if(top==window){
+			return;
+		}
+		domain.call(window.top,"login");
+	}
+	try{
+		checkLocation();
+	}catch(e){window.console(e);}
+</script>
+<title>好莱客办公系统</title>
+</head>
+<body>
+  
+        <!-- 背景图片 Starts -->
+        <div class="login-background-img"><img src="" id="login-bgImg" /></div>
+        <script type="text/javascript">
+            // 您必须指定你的背景图片的大小
+            var FullscreenrOptions = { width: 1920, height: 1080, bgID: '#login-bgImg' };
+            // 此处将会激活全屏背景
+            jQuery.fn.fullscreenr(FullscreenrOptions);
+        </script>
+        <!-- 背景图片 Ends -->
+        <div class="login_header">
+        	<div class="login_top_bar">
+        		<ul>
+                	
+                </ul>
+        	</div>
+            
+        </div>
+        <div class="login_content main_content">
+            <!-- 登录框 开始 -->
+            <div class="login_iframe loginFormOnRight">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+Com_IncludeFile("security.js");
+</script>
+
+<script type="text/javascript">
+function kmss_onsubmit(){
+	var loginInput = "请输入用户名和密码";
+	cleanerErrorMsg();
+	if(document.forms[0].j_username.value==""){
+		showErrorMsg(loginInput);
+		document.forms[0].j_username.focus();
+		return false;
+	}
+	if(document.forms[0].j_password.value==""){
+		showErrorMsg(loginInput);
+		document.forms[0].j_password.focus();
+		return false;
+	}
+	
+	document.getElementsByName("btn_submit")[0].disabled = true;	 
+	encryptPassword();
+
+	
+	
+	return true;
+}
+//显示错误信息
+function showErrorMsg(msg) {
+	var info = "系统提示：";
+	$(".lui_login_message_div").addClass("tip_message").html(info + msg);
+}
+//清除错误信息
+function cleanerErrorMsg() {
+	$(".lui_login_message_div").removeClass('tip_message').html("");
+}
+seajs.use(['lui/jquery'], function($) {
+	window.onload = function(){
+		var j_username = document.getElementsByName('j_username')[0].value;
+		if(j_username==""){ 
+			document.getElementsByName('j_username')[0].focus();
+		}
+		else{
+			document.getElementsByName('j_password')[0].focus();
+		}
+		
+		$(document).keypress(function(e) {
+			//if (e.which == 13)
+			//	$("form").submit();
+		});
+		
+		// ExceptionTranslationFilter对ACEGI_SECURITY_TARGET_URL 进行未登录url保持 请求中的hash并不会传递到服务端，故只能前端处理
+		
+		var urlObj = $('input[name="j_redirectto"]');
+		var hash = location.hash;
+		if(hash)
+			urlObj.val(urlObj.val() + hash);
+		
+		
+	}
+});
+function encryptPassword(){ 
+	document.forms[0].j_password.value = desEncrypt(document.forms[0].j_password.value);
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		<div class="header">登录系统</div>
+	
+	
+
+<div class="form_content">
+	<div class="form_content_item form_account">
+		<form action="j_acegi_security_check" method="POST" onsubmit="return kmss_onsubmit();" autocomplete="off">
+			<table class="lui_login_form_table">
+				 
+				<tr>
+					<td colspan="2" class="lui_login_message_td">
+						<div class="lui_login_message_div">
+							
+							
+								系统提示：
+							
+							
+								
+									用户名或密码不正确
+								
+								
+							
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="lui_login_input_title">用户名：</td>
+					<td class="lui_login_input_td">
+						<div class="lui_login_input_div">
+								
+									
+										  
+									
+									
+								
+							<input type='text' name='j_username' class="lui_login_input_username"  onfocus="this.select();" value='cc11001100_test' placeholder="用户名" autocomplete="off">
+						</div>
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td class="lui_login_input_title">密　码：</td>
+					<td class="lui_login_input_td">
+						<div class="lui_login_input_div">
+							<input type='password' name='j_password' class="lui_login_input_password" placeholder="密码" autocomplete="off">
+						</div>
+					</td>
+				</tr>
+				
+				
+				
+			 
+			 	
+			 	
+				
+				<tr>
+					<td class="lui_login_button_td" colspan="2"  v-bind:class="{choose_hover:isLoginButtonActive}">
+						<a href="javascript:document.getElementsByName('btn_submit')[0].click();">
+					<div class="lui_login_button_div_l" data-color="loginBtn_bgColor" @mouseenter="btnEnter" @mouseleave="btnLeave" v-bind:style="{color:loginBtn_font_color}">
+	                	<div class="lui_login_button_div_r">
+	                         	<div class="lui_login_button_div_c">
+	                         		登录
+	                         	</div>
+	                    </div>
+	                </div>
+             	 </a>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						
+					</td>
+				</tr>
+			</table>	
+			<div class="lui_login_form_opt">
+				<a class="kkDownloadLink link" href="#" target="_blank">
+			   	KK客戶端下载</a>
+			    
+			</div>	
+			
+			<input type=hidden name="j_redirectto" value="">
+			<input type=submit style="border: 0px; width: 0px; height: 0px; background: none;" name="btn_submit">
+		</form>
+	</div>
+	
+</div>
+<div class="form_bottom">
+     
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="third_login_form" class="third_login_form">
+		<div class="third_login_header">
+			<span>第三方登录</span>
+		</div>
+		<ul class='third_login_list'>
+		
+			<li class="third_login_item">
+				<a  href="https://oapi.dingtalk.com/connect/qrconnect?appid=dingoaak84cdyhluj6gqia&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Foa.holike.com%2Fthird%2Fding%2FpcScanLogin.do%3Fmethod%3Dservice" title="钉钉扫码登录"><img class="third_login_item_icon" src="/third/ding/resource/images/scanCode-ding.png"></i></a>
+			</li>
+		
+		</ul>
+	</div>
+
+</div>
+                <!-- 下拉弹出窗 Starts -->
+            <!-- 登录框 结束 -->
+        </div>
+        <div class="login_footer">
+        	
+            <p>Copyright © 2001-2019 好莱客创意家居股份有限公司 版权所有</p>
+        </div>
+        <script type="text/javascript">
+        
+         LUI.ready(function(){
+        	 if("en-US" == "zh") {
+             	//英文环境
+                 $('body').addClass('muilti_eng');
+             }
+         });
+
+         // 获取随机登录图片信息，返回随机获取的图片名称
+         function get_random_bg() {
+			
+			return "single_random_login_bg2.jpg?s_cache=1605153291302";
+         }
+       	//添加提示
+     	$('body').append('<div class="tipsClass">大写锁定已打开</div>');
+        </script>
+	
+</body>
+</html>
+
+

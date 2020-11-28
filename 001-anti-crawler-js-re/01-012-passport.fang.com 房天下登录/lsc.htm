@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>collect v_201601221600</title>
+</head>
+<body>
+<span id="M" style="font-size:32px;"></span>
+<script type="text/javascript">
+    var actions = [2, 0, 2, 2, 4, 2, 5, 6, 5, 1, 4, 2, 3, 4, 4, 3, 4, 5, 5, 4, 5, 4, 3, 0, 4, 1, 0, 5, 0, 0, 0, 4, 0, 5, 5, 5, 5, 5, 5, 5, 6, 5, 4, 4, 6, 6, 6, 6, 6, 6, 4, 5, 4, 5, 4, 2, 2, 3, 4, 6, 6, 6, 5, 5, 4, 5, 5, 4, 4, 4, 4, 5, 5, 5, 3, 6, 4, 3, 5, 0, 0];
+    var guid;
+    var today;
+    var q = {};
+    q.parse = function () {
+        var c = window.location.search.substr(1);
+        if (c != "") {
+            c = c.split("&");
+            var b;
+            for (var a = 0; a < c.length; a++) {
+                b = c[a].split("=");
+                q[b[0]] = b[1]
+            }
+        }
+    };
+    q.parse();
+
+    function setItem(b, a) {
+        window.localStorage.removeItem(b);
+        window.localStorage.setItem(b, a)
+    }
+
+    function getItem(b, c) {
+        var a = window.localStorage.getItem(b);
+        if (a == null && c != null) {
+            a = c
+        }
+        return a
+    }
+
+    function removeItem(a) {
+        window.localStorage.removeItem(a)
+    }
+
+    function hexToDec(e) {
+        var a = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var c;
+        var f;
+        var g = 0;
+        for (var b = e.length - 1; b >= 0; b--) {
+            c = e.substr(b, 1);
+            c = c.toUpperCase();
+            f = a.indexOf(c) * Math.pow(36, e.length - 1 - b);
+            g += f
+        }
+        return g
+    }
+
+    function hexDateToDec(c) {
+        var a;
+        var b = new Date();
+        if (c.length == 3) {
+            b = new Date(2000 + hexToDec(c.substr(0, 1)), hexToDec(c.substr(1, 1)), hexToDec(c.substr(2, 1)))
+        }
+        return getDays(b)
+    }
+
+    function getDays(a) {
+        if (a == null) {
+            a = new Date()
+        }
+        return Math.floor((a.valueOf() - new Date(2012, 1, 1).valueOf()) / 1000 / 3600 / 24)
+    }
+
+    today = getDays();
+
+    function getSeconds(a) {
+        if (a == null) {
+            a = new Date()
+        }
+        return a.getHours() * 3600 + a.getMinutes() * 60 + a.getSeconds()
+    }
+
+    function parseAction(b) {
+        if (typeof b != "number") {
+            b = parseInt(b)
+        }
+        if (isNaN(b)) {
+            b = 0
+        }
+        if (b > actions.length) {
+            b = 0
+        } else {
+            b = actions[action]
+        }
+        return b
+    }
+
+    function parseValues(d) {
+        var f = getItem(d);
+        var b = [];
+        if (f != null) {
+            var e, a;
+            f = f.split(",");
+            for (var c = 0; c < f.length; c++) {
+                a = f[c].split("_");
+                e = {};
+                if (a.length == 7) {
+                    e.v = a[0];
+                    e.b = parseInt(a[1]);
+                    if (isNaN(e.b)) {
+                        e.b = 0
+                    }
+                    e.d = parseInt(a[2]);
+                    e.t = parseInt(a[3]);
+                    e.c = a[4];
+                    e.p = parseInt(a[5]);
+                    e.m = parseInt(a[6])
+                }
+                if (today - e.d < 60) {
+                    b.push(e)
+                }
+            }
+            while (b.length > 100) {
+                b.shift();
+            }
+        }
+        return b
+    }
+
+    function joinValues(a) {
+        var c = [];
+        for (var b = 0; b < a.length; b++) {
+            c.push(a[b].v + "_" + a[b].b + "_" + a[b].d + "_" + a[b].t + "_" + a[b].c + "_" + a[b].p + "_" + a[b].m)
+        }
+        return c.join(",")
+    }
+
+    function iterate(h, e, a, k) {
+        if (e != null && e != "") {
+            e = e.replace(/[\*=&,:;\+_]/g, "");
+            if (e.length > 100) {
+                e = e.substr(0, 100)
+            }
+            var d = parseValues("_" + h);
+            var f = -1;
+            for (var g = 0; g < d.length; g++) {
+                if (d[g].v == e && ((d[g].c == undefined || d[g].c == 0) ? true : d[g].c == k) && d[g].b == a) {
+                    f = g;
+                    break
+                }
+            }
+            if (f > -1) {
+                var j = d[f];
+                j.m = getSeconds();
+                j.p++;
+                if (j.p > 99) {
+                    j.p = 99
+                }
+                j.c = k;
+                if (getDays() - j.d > 0) {
+                    j.d = today;
+                    j.t++;
+                    if (j.t > 9) {
+                        j.t = 9
+                    }
+                }
+            } else {
+                d.push({v: e, b: a, d: today, t: 1, c: k, p: 1, m: getSeconds()})
+            }
+            setItem("_" + h, joinValues(d))
+        }
+    }
+
+    function collect(h, k, l, d) {
+        var m = {};
+        var f, e;
+        guid = h;
+        setItem("$guid", guid);
+        var a = d.split(";");
+        var n;
+        for (f = 0; f < a.length; f++) {
+            n = a[f].split(":");
+            if (n.length == 2 && n[1] != "") {
+                m[n[0]] = n[1].split(",")
+            }
+        }
+        for (var o in m) {
+            for (f = 0; f < m[o].length; f++) {
+                iterate(o, m[o][f], l, k)
+            }
+        }
+        document.getElementById("M").innerHTML = "COLLECT OK!";
+        parent.postMessage("collect", "*")
+    }
+
+    collect(q.g, decodeURIComponent(q.c), q.b, q.p);
+</script>
+</body>
+</html>
