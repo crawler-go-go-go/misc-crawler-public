@@ -1,0 +1,2061 @@
+
+
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+
+                <meta name="SiteIDCode" content="000000">
+                <meta name="SiteName" content="云搜索默认">
+                <meta name="SiteDomain" content="www.toptimetech.com">
+
+    <title>智能云搜索</title>
+
+    <link rel="stylesheet" type="text/css" href="pc/css/list.css">
+    <link rel="stylesheet" type="text/css" href="pc/css/laydate.css">
+    <link rel="stylesheet" type="text/css" href="pc/css/jquery-ui-min.css">
+    <link rel="stylesheet" href="skin/result?siteCode=000000">
+
+        <link rel="stylesheet" href="pc/css/head_n.css">
+
+    <script type="text/javascript" src="pc/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="pc/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="pc/js/laydate.js"></script>
+    <script type="text/javascript" src="pc/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="pc/js/jquery.SuperSlide.2.1.3.js"></script>
+    <script type="text/javascript" src="pc/js/list.js"></script>
+    <script type="text/javascript" src="pc/js/common.js"></script>
+    <script type="text/javascript" src="pc/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="pc/js/datatables.min.js"></script>
+    <script type="text/javascript" src="pc/js/searchbox.js"></script>
+    <script type="text/javascript" src="pc/js/echarts.min.js" ></script>
+        <script src="pc/js/recorder.js" type="text/javascript"></script>
+        <script src="pc/js/voice.js" type="text/javascript"></script>
+
+
+
+</head>
+
+<body>
+
+<div class="bigBanner">
+    <div class="header box clearfix headBanner">
+
+
+        <div class="search fr">
+            <div class="searchbox clearfix">
+                <div  class="searchform zl fl" >
+                    <form action="s">
+                        <input type="hidden" name="siteCode" id="siteCode" value="000000">
+                        <input type="hidden" name="tab" id="tab" value="all">
+
+                            <a id="speechBtn" href="javascript:void(0);" class="btn_yuyin" title="长按进行语音搜索"></a>
+                            <input type="text" class="searchtxt" name="qt" id="qt" value="户口"
+                                   autocomplete="off">
+
+                        <input type="button" class="searchbtn" value="搜索" id="searchBtn" onclick="go()">
+                        <div class="searchul" id="ulSearchList">
+                        </div>
+                    </form>
+
+                        <div class="searchword">
+                            <span>热搜词：</span>
+                                <a href="s?tab=all&siteCode=000000&qt=%E5%B1%85%E4%BD%8F%E8%AF%81"
+                                   title="居住证">居住证</a>
+                                <a href="s?tab=all&siteCode=000000&qt=%E6%88%B7%E5%8F%A3"
+                                   title="户口">户口</a>
+                        </div>
+
+                </div>
+
+                <div class="searchad fr">
+                        <a href="javascript:void(0);" class="searchad_gj"> 高级搜索 </a>
+                        <a href="javascript:void(0);" class="searchad_zcwj"> 政策文件搜索 </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="layer"  style="display:none;"  ></div>
+<div class="searchad_box"  style="display:none;"  >
+    <div class="searchad_box_gj"  style="display:none;"  >
+        <div class="title box">
+            <a href="javascript:void(0);" class="searchad_gj_a on"> 高级搜索 </a>
+                <a href="javascript:void(0);" class="searchad_zcwj_a"> 政策文件 </a>
+            <span class="close"></span>
+        </div>
+        <div class="condition_top">
+            <div class="box">
+                <div class="level"><span class="fir">搜索结果：</span> <span class="sec">包含以下全部的关键词</span>
+                    <input id="q1" type="text">
+                </div>
+                <div class="level"><span class="fir"></span> <span class="sec">包含以下的完整关键词</span>
+                    <input id="q2" type="text">
+                </div>
+                <div class="level"><span class="fir"></span> <span class="sec">包含以下任意一个关键词</span>
+                    <input id="q3" type="text">
+                </div>
+                <div class="level"><span class="fir"></span> <span class="sec">不包含以下关键词</span>
+                    <input id="q4" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="condition_bottom">
+            <div class="box clearfix">
+                <div class="level"><span class="fir">文档格式：</span>
+                    <label>
+                        <input type="radio" name="fileType" value="" checked>
+                        全部格式</label>
+                    <label>
+                        <input type="radio" name="fileType" value="word">
+                        WORD</label>
+                    <label>
+                        <input type="radio" name="fileType" value="ppt">
+                        PPT</label>
+                    <label>
+                        <input type="radio" name="fileType" value="excel">
+                        EXCEL</label>
+                    <label>
+                        <input type="radio" name="fileType" value="pdf">
+                        PDF</label>
+                    <label>
+                        <input type="radio" name="fileType" value="txt">
+                        TXT</label>
+                    <label>
+                        <input type="radio" name="fileType" value="zip">
+                        ZIP</label>
+                </div>
+                <div class="level timeradio"><span class="fir">时间范围：</span>
+                    <label>
+                        <input type="radio" name="days" value="" checked>
+                        全部时间</label>
+                    <label>
+                        <input type="radio" name="days" value="365">
+                        一年内</label>
+                    <label>
+                        <input type="radio" name="days" value="30">
+                        一月内</label>
+                    <label>
+                        <input type="radio" name="days" value="7">
+                        一周内</label>
+                    <label>
+                        <input type="radio" name="days" value="-1" class="zdyradio">
+                        自定义</label>
+                    <div class="zdydate clearfix"><span class="thi">从</span>
+                        <input type="text" class="input200 dateicon" name="zdyqsrq" id="zdyqsrq">
+                        <span class="thi">至</span>
+                        <input type="text" class="input200 dateicon" name="zdyjsrq" id="zdyjsrq">
+                    </div>
+                </div>
+                <div class="level"><span class="fir">排序方式：</span>
+                    <label>
+                        <input type="radio" name="sort" value="" checked>
+                        按相关度排序</label>
+                    <label>
+                        <input type="radio" name="sort" value="dateDesc">
+                        按时间排序</label>
+                </div>
+                <div class="level"><span class="fir">搜索位置：</span>
+                    <label>
+                        <input type="radio" name="keyplace" value="" checked>
+                        任何地方</label>
+                    <label>
+                        <input type="radio" name="keyplace" value="1">
+                        仅标题</label>
+                </div>
+
+
+
+                <input type="button" value="开始搜索" onClick="adv_search()">
+                <span class="btn_prompt">请至少填写一个包含的关键词</span></div>
+        </div>
+    </div>
+    <div class="searchad_box_zcwj"  style="display:none;"  >
+        <div class="title box">
+            <a href="javascript:void(0);" class="searchad_gj_a"> 高级搜索 </a>
+            <a href="javascript:void(0);" class="searchad_zcwj_a on"> 政策文件 </a>
+            <span class="close"></span></div>
+        <div class="condition_top">
+            <div class="box clearfix">
+                <div class="level"><span class="fir">关 键 词：</span>
+                    <input type="text" class="input610" id="word" value="户口">
+                </div>
+                <div class="level"><span class="fir">发文机构：</span>
+                    <input type="text" class="input610" id="docpubname" value="">
+                </div>
+                <div class="level"><span class="fir">发文字号：</span>
+                        <input type="text" class="input200" id="docwz" value="" placeholder=""
+                               onfocus="this.placeholder=''" onblur="this.placeholder=''">
+                        <input type="text" class="input200" id="docnf" value="" placeholder=""
+                               onfocus="this.placeholder=''" onblur="this.placeholder=''">
+                    <input type="text" class="input200" id="docjtwh" style="width: 170px" value=""
+                           placeholder="" onfocus="this.placeholder=''" onblur="this.placeholder=''">
+                    <span class="thi">号</span>
+                </div>
+
+                <div class="level"><span class="fir">日　　期：</span>
+
+                    <select id="docDateType" style="display: none">
+                    </select>
+                    <span class="thi">从</span>
+                    <input type="text" class="input200 dateicon" style="width: 165px" value=""
+                           name="qsrq" id="qsrq" placeholder="开始日期">
+                    <span class="thi">至</span>
+                    <input type="text" class="input200 dateicon" style="width: 165px" value=""
+                           name="jsrq" id="jsrq" placeholder="结束日期">
+                </div>
+                <div class="level" style="display: none">
+                    <span class="fir">主题分类：</span>
+                    <select class="selone" id="ztflParentId">
+                        <option value="">--请选择--</option>
+                    </select>
+                </div>
+                <div class="level"><span class="fir">搜索位置：</span>
+                    <span>
+                      <label><input type="radio" name="keyPlacet"
+                                    value="0">全文</label>
+                      <label><input type="radio" name="keyPlacet"
+                                    value="1" checked>标题</label>
+                    </span>
+                </div>
+                <div class="level"><span class="fir">结果排序：</span>
+                        <span id="">
+                            <label><input type="radio" name="sortt"
+                                          value="relevance"  checked>按相关度排序</label>
+                            <label><input type="radio" name="sortt"
+                                          value="dateDesc">按日期排序</label>
+                        </span>
+
+                </div>
+
+
+                <input type="button" value="开始搜索" onclick="zcwj_search()">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav">
+    <div class="box">
+        <ul class="navmenu clearfix">
+                <li class="on"></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    search('qt', 'ulSearchList', 'searchBtn');
+
+    // 搜索调用
+    function go() {
+        var qt = $("#qt").val();
+        var tab = $("#tab").val();
+        if (tab != zcTabName && (qt == null || qt === "")) {
+            alert("请输入搜索条件");
+            return;
+        }
+
+        var url = "";
+        if(window.location.origin){
+            url = window.location.origin
+        }else {
+            // ie 10版本不支持window.location.origin 需要自己拼接
+            url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '')
+        }
+        url += window.location.pathname
+
+        url = delParam(url, "qt")
+        url = delParam(url, "siteCode")
+        url = delParam(url, "tab")
+        url = addParam(url, "qt", qt)
+        url = addParam(url, "siteCode", $("#siteCode").val())
+        url = addParam(url, "tab", tab)
+
+        if ($.cookie("toolsStatus")) {
+            url = delParam(url, "toolsStatus")
+            url = addParam(url, "toolsStatus", $.cookie('toolsStatus'))
+        }
+
+        window.open(url, "_self");
+    }
+
+    // 导航调用外部链接
+    function outside(url) {
+        window.open(url + encodeURIComponent(qt) , "_blank");
+    }
+
+    // 高级搜索
+    function adv_search() {
+        var adv_list = ""
+
+
+        var q1 = encodeURIComponent($("#q1").val()) || "";
+        var q2 = encodeURIComponent($("#q2").val()) || "";
+        var q3 = encodeURIComponent($("#q3").val()) || "";
+        var q4 = encodeURIComponent($("#q4").val());
+        if (q1 === "" && q2 === "" && q3 === "") {
+            $(".btn_prompt").show();
+            return false;
+        } else {
+            $(".btn_prompt").hide();
+        }
+        var sdate = $("#zdyqsrq").val() || "";
+        var edate = $("#zdyjsrq").val() || "";
+
+        var fileType = $("input[name='fileType']:checked").val();
+        var days = $("input[name='days']:checked").val();
+        var sort = $("input[name='sort']:checked").val();
+        var keyplace = $("input[name='keyplace']:checked").val();
+
+        var url = "adv?&siteCode=000000&q1=" + q1 + "&q2=" + q2 + "&q3=" + q3 + "&q4=" + q4
+            + "&days=" + days + "&fileType=" + fileType + "&keyPlace=" + keyplace
+            + "&sdate=" + sdate + "&edate=" + edate + "&sort=" + sort;
+        if (adv_list.length > 0){
+            adv_list.split(",").forEach(function (key, index) {
+                var tempVal = $("#adv_"+key+"").val();
+                if (tempVal){
+                    url += "&"+key+"="+tempVal;
+                }
+            })
+        }
+
+        $.ajax({
+            type: "get",
+            url: url,
+            success: function (data) {
+                window.open(data, "_self");
+            }
+        });
+    }
+
+    // 政策文件搜索
+    function zcwj_search() {
+
+        var doc_list = ""
+
+
+        var word = encodeURIComponent($("#word").val()) || "";
+        var sdate = $("#qsrq").val() || "";
+        var edate = $("#jsrq").val() || "";
+        var docpubname = $("#docpubname").val() || "";
+        var docDateType = $("#docDateType").val() || "";
+        var docwz = $("#docwz").val() || "";
+        var docnf = $("#docnf").val() || "";
+        var docjtwh = $("#docjtwh").val() || "";
+        var ztflParentName = $("#ztflParentId").val() || "";
+
+
+        var sort = $("input[name='sortt']:checked").val();
+        var keyplace = $("input[name='keyPlacet']:checked").val();
+
+        var url = "s?&siteCode=000000"
+            +"&qt=" + word
+            + "&tab=" + zcTabName
+            + "&keyPlace=" + keyplace
+            + "&docDateType=" + docDateType
+            + "&docJtwh=" + docjtwh
+            + "&startDateStr=" + sdate
+            + "&endDateStr=" + edate +
+            "&sort=" + sort
+            + "&pubName=" + encodeURIComponent(docpubname)
+            + "&docWz=" + encodeURIComponent(docwz)
+            + "&docNf=" + docnf
+            + "&ztflParentName=" + encodeURIComponent(ztflParentName)
+            + "&toolsStatus=1";
+
+
+        if ((sdate && sdate!="") || (edate&&edate!="")) {
+            url += "&timeOption=2"
+        }
+
+        if (doc_list.length > 0){
+            doc_list.split(",").forEach(function (key, index) {
+                var tempVal = $("#doc_"+key+"").val()
+                if (tempVal){
+                    url += "&"+key+"="+tempVal
+                }
+            })
+        }
+
+        window.open(url, "_self");
+    }
+
+    // 高级搜索关闭事件
+    $(".close").click(function () {
+        $(".layer").hide();
+        $(".searchad_box").slideUp();
+    });
+
+</script>
+
+            <div class="tools box clearfix" style="margin: 30px auto 0; position: relative;">
+                    <span class="nums">相关结果 81 个</span>
+                <div class="toolsshow"  style='display: none' >
+                    <div class="toolsbtn"><i></i>搜索工具</div>
+                </div>
+                <div class="toolshide"  style='display: block'>
+                    <div class="toolsnav">
+                            <div>
+                                <span class="b">排序：</span>
+                                <a href="javascript:void(0);" class="on"
+                                   >按相关度</a>
+                                    <a href="javascript:void(0);"
+                                       class="noon"
+                                       onclick="searchTool({'sort':'dateDesc'})" >按日期</a>
+                            </div>
+                            <div>
+                                <span class="b">搜索位置：</span>
+                                <a href="javascript:void(0);" class="noon"
+                                   onclick="searchTool({'keyPlace':0,'toolsStatus':1})" >全文</a>
+                                <a href="javascript:void(0);" class="on"
+                                   >标题</a>
+                            </div>
+
+
+                            <div class="toolsul"  style="display: inline" >
+                                <span>
+                                        时间选择
+                                </span>
+                                <i></i>
+                                <ul>
+
+
+                                    <li class="line"></li>
+                                    <li>从
+                                        <input type="text" class="dateicon" name="stimeqsrq"
+                                               value="" id="stimeqsrq">
+                                    </li>
+                                    <li>至
+                                        <input type="text" class="dateicon" name="stimeqsrq"
+                                               value="" id="stimejsrq">
+                                    </li>
+                                    <li>
+                                        <input type="button" value="确定" class="zdybtn" id="zcdatebtu">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="toolsul" style="display: none">
+                                <span> 主题分类<i></i></span>
+                                    <ul id="ztflId" style="width: 184px">
+                                        <li class="toolsli">全部</li>
+                                    </ul>
+                            </div>
+                    </div>
+                    <div class="toolsbtn"><i></i>收起工具</div>
+                    <div class="filter" id="filter"></div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                //搜索工具方法
+                function searchTool(param) {
+                    var url = window.location.href;
+                    url = delParam(url, "qt");
+                    url = delParam(url, "tab");
+                    url = delParam(url, "siteCode");
+                    url = delParam(url, "page")
+                    url = addParam(url, "qt", qt);
+                    url = addParam(url, "tab", database);
+                    url = addParam(url, "siteCode", siteCode);
+                    if ($.cookie("toolsStatus")) {
+                        url = delParam(url, "toolsStatus")
+                        url += "&toolsStatus=" + $.cookie("toolsStatus")
+                    }
+                    Object.keys(param).forEach(function (key) {
+                        console.log(key, param[key]);
+                        url = delParam(url, key);
+                        url = addParam(url, key, param[key]);
+                    });
+                    window.open(url, "_self");
+                }
+
+
+                function tagDate() {
+                    var param = window.location.search;
+                    param = delParam(param, "qt");
+                    param = delParam(param, "tab");
+                    param = delParam(param, "siteCode");
+                    param = addParam(param, "qt", qt);
+                    param = addParam(param, "tab", database);
+                    param = addParam(param, "siteCode", siteCode);
+                    $.ajax({
+                        type: "post",
+                        url: "tag" + param + "&pid=root",
+                        dataType: "json",
+                        async: false,
+                        success: function (json) {
+                            multiple(json, param);
+
+                        }
+                    });
+                }
+
+                //对应关系
+                var maps = {"DOCNF": "docNf", "DOCWZ": "docWz", "DOCPUBNAME": "pubName", "ZTFL1": "ztflParentName"}
+
+                //多选工具
+                function multiple(json, param) {
+                    // 机关代字
+                    var docwz = $("#docwz").val()
+                    // 文号年份
+                    var docnf = $("#docnf").val()
+                    // 发文机构
+                    var docpubname = $("#docpubname").val()
+
+                    var ztfl = getParamVal(param, "ztflParentName")
+
+                    var tagList = json["tagList"];
+                    if (tagList) {
+                        var dom = '<div class="filter-title">已选<span class="filter-con" id="con">';
+                        var con = '';
+                        var filter = '</span>';
+                        filter += '<button id="empty" class="empty-btn" onclick="removeAllSel()">全部清空</button>';
+                        filter += '</div>';
+                        filter += '<div class="filtercontent">';
+                        var qu = beijing.concat();
+                        for (var m in tagList) {
+                            var val = tagList[m];
+                            var result = val["result"];
+                            var field = val["field"];
+                            var highlight = val["highlight"];
+
+                            if ("all" == zcTabName) {
+
+                                if (field == "DOCWZ" && docwz) {
+                                    highlight = docwz
+                                }
+                                if (field == "DOCNF" && docnf) {
+                                    highlight = docnf
+                                }
+                                if (field == "DOCPUBNAME" && docpubname) {
+                                    highlight = docpubname
+                                }
+
+                                if (field == 'ZTFL1' && ztfl) {
+                                    highlight = ztfl;
+                                }
+                            }
+
+                            if (highlight) {
+                                if (highlight.indexOf(",") != -1 && !highlight.startsWith(",") && !highlight.endsWith(",")) {
+                                    highlight.split(",").forEach(function (item, index) {
+                                        con += '<a href="javascript:void(0);" data-value="' + field + '" onclick="removeSel(\'' + field + '\',\'' + item + '\')">' + item + '<i></i></a>';
+                                    })
+                                } else {
+                                    con += '<a href="javascript:void(0);" data-value="' + field + '" onclick="removeSel(\'' + field + '\',\'' + highlight + '\')">' + highlight + '<i></i></a>';
+                                }
+                            }
+
+                            if (result && field == "DOCNF" && result.length == 1 && result[0].key == "0") {
+                                continue;
+                            }
+
+                            if (result.length > 0) {
+                                filter += '<div class="filter-item clearfix">';
+                                filter += '<div class="filter-left">' + val["display"] + '：</div>';
+                                filter += '<div class="filter-center">';
+                                filter += '<ul class="clearfix">';
+                                var baseUrl = window.location.href;
+                                baseUrl = delParam(baseUrl, "qt");
+                                baseUrl = delParam(baseUrl, "tab");
+                                if (getParam(baseUrl, "page")) {
+                                    baseUrl = delParam(baseUrl, "page");
+                                }
+                                baseUrl = delParam(baseUrl, "siteCode");
+                                baseUrl = addParam(baseUrl, "qt", qt);
+                                baseUrl = addParam(baseUrl, "tab", database);
+                                baseUrl = addParam(baseUrl, "siteCode", siteCode);
+                                if ("all" == zcTabName) {
+                                    baseUrl = delParam(baseUrl, maps[field])
+                                }
+                                baseUrl = delParam(baseUrl, field);
+
+                                if (false) {
+                                    filter += '<li><a href="javascript:void(0);" onclick="removeSel(\''+ field+'\',\''+ ztfl + '\')" class="active">' + ztfl + '</a></li>';
+                                } else {
+
+                                    var activeLi = ""
+                                    var nuActiveLi = ""
+
+                                    for (var i in result) {
+                                        var key = result[i].key;
+
+                                        if (key == "0") {
+                                            continue;
+                                        }
+                                        var url = "" + baseUrl
+
+                                        var tempVal = key
+                                        if (highlight){
+                                            tempVal += "," + highlight
+                                        }
+
+                                        if ("all" == zcTabName && maps[field]) {
+                                            url = addParam(baseUrl, maps[field], tempVal );
+                                        }
+                                        url = addParam(url, field, tempVal);
+
+                                        if (key == highlight) {
+                                            activeLi += '<li><a href="javascript:void(0);" onclick="removeSel(\''+ field+'\',\''+ key + '\')" class="active">' + key + '</a></li>';
+                                        } else {
+                                            var heightFlag = true
+                                            if (highlight && highlight.indexOf(",") != -1 && !highlight.startsWith(",") && !highlight.endsWith(",")) {
+                                                highlight.split(",").forEach(function (item, index) {
+                                                    if (key == item && heightFlag){
+                                                        heightFlag = false
+                                                        activeLi += '<li><a href="javascript:void(0);" onclick="removeSel(\''+ field+'\',\''+ key + '\')" class="active">' + key + '</a></li>';
+                                                    }
+                                                })
+
+                                                if (heightFlag){
+                                                    nuActiveLi += '<li><a href="' + url + '">' + key + '</a></li>';
+                                                }
+
+                                            } else {
+                                                nuActiveLi += '<li><a href="' + url + '">' + key + '</a></li>';
+                                            }
+
+                                        }
+                                        if ("all" === "zwfw") {
+                                            qu.splice(qu.indexOf(key), 1);
+                                        }
+
+
+                                    }
+
+
+                                    filter += activeLi;
+                                    filter += nuActiveLi;
+                                }
+
+
+
+                                filter += '</ul>';
+                                filter += '<a href="javascript:void(0);" class="more down fontlan" onclick="more(this)">更多</a>';
+                                filter += '</div>';
+                                filter += '</div>';
+                            }
+                        }
+                        filter += '</div>';
+                        dom += con + filter;
+                        $("#filter").append(dom);
+                        filterul();
+                    }
+                }
+
+
+                function removeAllSel() {
+                    var href = window.location.search;
+                    href = delParam(href, "qt");
+                    href = delParam(href, "tab");
+                    href = delParam(href, "siteCode");
+                    href = addParam(href, "qt", qt);
+                    href = addParam(href, "tab", database);
+                    href = addParam(href, "siteCode", siteCode);
+
+                    $("#con").find('a').each(function () {
+                        var val = $(this).data("value");
+                        href = delParam(href, val);
+                        href = delParam(href, maps[val]);
+                    });
+                    window.location.href = href;
+                }
+
+                function removeSel(field, value) {
+                    var href = window.location.search;
+                    href = delParam(href, "qt");
+                    href = delParam(href, "tab");
+                    href = delParam(href, "siteCode");
+                    href = addParam(href, "qt", qt);
+                    href = addParam(href, "tab", database);
+                    href = addParam(href, "siteCode", siteCode);
+
+                    var param = getParam(href, field);
+
+                    href = delParam(href, field);
+                    href = delParam(href, maps[field])
+
+                    if (param.indexOf(",") != -1) {
+                        var temp = "";
+                        param.split(",").forEach(function (item, index) {
+                            if (item != value) {
+                                temp += item + ","
+                            }
+                        })
+                        temp = temp.substring(0, temp.length - 1)
+                        if (temp) {
+                            href = addParam(href, field, temp)
+                        }
+                    }
+
+                    window.location.href = href;
+                }
+            </script>
+
+<div class="contentbox box clearfix">
+
+<div class="content fl">
+
+    
+
+
+
+
+
+
+<script>
+    function openUrl(tab, siteCode, name) {
+        window.open("s?tab=" + tab + "&siteCode=" + siteCode + "&qt=" + encodeURIComponent(name), "_self")
+    }
+</script>
+
+
+
+
+<div class="topnews clearfix" id="news"></div>
+<script type="text/javascript">
+    function showNewsFunc() {
+        // 最新消息无qt不显示
+        if (qt && "" != qt) {
+            $.ajax({
+                type: "post",
+                url: "news",
+                data: {
+                    siteCode: siteCode,
+                    qt: qt,
+                    tab: database,
+                    pageSize: 5,
+                    redTitleLength: 28,
+                    combine: "MD5TITLE",
+                    mode: 1
+                },
+                dataType: "json",
+                success: function (data) {
+                    var json = data;
+                    if (json.response === "TRUE" && json.resultList !== "" && json.resultList.length > 0) {
+                        var dom = "";
+                        if (debug) {
+                            dom += '<div class="captitle"><em>' + debug + '</em>的最新相关消息</div>';
+                        } else {
+                            dom += '<div class="captitle"><em>' + qt + '</em>的最新相关消息</div>';
+                        }
+
+
+                                                dom += '<ul class="list">';
+                        for (var k in json.resultList) {
+                            var kv = json.resultList[k];
+
+                            if (k == 0 && kv.includeImg == true) {
+                                var encodeUrl = kv.encodeUrl;
+                                var encodeTitle = encodeURIComponent(kv.title);
+                                var location = 1;
+                                var url = "view?qt=" + qtPasser + "&location=" + location + "&reference=" + kv.reference + "&url=" + encodeUrl + "&title=" + encodeTitle + "&database=" + database + "&siteCode=" + siteCode;
+                                var img = "img?reference=" + kv.reference + "&index=" + kv.dbName + "&type=1&imgType=.jpg&siteCode=" + siteCode;
+
+                                dom += '<div class="news clearfix pb10">';
+                                dom += '<div class="title">';
+                                dom += '<a href="' + url + '" title="' + kv.title + '" class="fontlan" target="_blank">';
+                                dom += kv.redTitle;
+                                dom += '</a>';
+                                dom += '</div>';
+                                dom += '<div class="content">';
+                                dom += '<a target="_blank" href="' + url + '"><img src="' + img + '" width="140" height="83" alt=""/>';
+                                dom += '</a>';
+                                dom += '<div class="txtpic2">';
+                                dom += kv.summary;
+                                dom += '</div>';
+                                dom += '<div>' + kv.docDate + '</div>';
+                                dom += '</div>';
+                                dom += '</div>';
+                            } else {
+                                var encodeUrl = kv.encodeUrl;
+                                var encodeTitle = encodeURIComponent(kv.title);
+                                var location = k + 1;
+                                var url = "view?qt=" + qtPasser + "&location=" + location + "&reference=" + kv.reference + "&url=" + encodeUrl + "&title=" + encodeTitle + "&database=" + database + "&siteCode=" + siteCode;
+
+                                dom += '<li><span class="date">';
+                                dom += kv.docDate;
+                                dom += '</span><a target="_blank" href="' + url + '">' + kv.redTitle + '</a></li>';
+                            }
+
+                        }
+                        dom += '</ul>';
+                        $("#news").html(dom);
+                        $("#news").addClass("scene")
+                    } else {
+                        console.log("no search news message!");
+                    }
+                }
+            });
+        }
+    }
+</script>
+<div id="relatedPicId" style="display: none" class="news clearfix"></div>
+<div id="relatedVideoId" style="display: none" class="news clearfix"></div>
+
+<script type="text/javascript">
+    var constant_video = "video";
+    var constant_pic = "pic";
+
+
+    function genPicOrVidioHtmlStr(type, data) {
+        var tab = $("#tab").val()
+
+        var html = '<div class="title">';
+
+        if (type == constant_video){
+            html += '<span>相关视频</span>'
+        } else {
+            html += '<span>相关图片</span>'
+        }
+        // html += '<a href="s?siteCode=' + siteCode + '&tab=' + tab + '"&qt=' + qt + '" class="fontlan">' + qt + '</a>'
+        html += '</div>'
+
+        ///// 主体列表
+        html += '<div class="picxg clearfix" id="picxg">'
+        html += '  <ul class="clearfix">'
+
+        $.each(data.resultList, function (k, kv) {
+            var location = k + 1;
+
+            html += '<li class="' + type + '">'
+            html += '  <a href="view?qt=' + encodeURIComponent(qt) + '&location=' + location + '&reference=' + kv.reference + '&url=' + kv.encodeUrl + '&title=' + encodeURIComponent(kv.title) + '&tab=' + tab + '&siteCode=000000" target="_blank">'
+
+
+            html += '    <img src="img?reference=' + kv.reference + '&index=' + kv.indexDB + '&type=1&imgType=.jpg&siteCode=' + siteCode + '" title="' + kv.title + '" alt="' + kv.title + '">'
+            html += '<span>' + kv.title + '</span>'
+            if (type == constant_video) {
+                html += '<span class="play"></span>';
+            }
+            html += '</li>'
+
+        });
+
+        html += '  </ul>'
+        html += '</div'
+        return html;
+    }
+
+    // 相关图片搜索
+    function imgSearch(tab, otherTab) {
+        var qt = $("#qt").val();
+        var siteCode = $("#siteCode").val();
+        $.ajax({
+            type: "post",
+            url: "imgVideoSearch",
+            data: {type: "imgSearch", relatedTab: otherTab, siteCode: siteCode, qt: qt, tab: tab, mode: 1},
+            dataType: "json",
+            success: function (data) {
+                if (data.success && data.resultList.length > 0) {
+                    var html = genPicOrVidioHtmlStr(constant_pic, data);
+
+                    $("#relatedPicId").html(html);
+                    $("#relatedPicId").show();
+                    magnify("picxg", "a", "."+constant_pic);
+
+                }
+            }
+        });
+    }
+
+    // 相关视频搜索
+    function videoSearch(tab, otherTab) {
+        var qt = $("#qt").val();
+        var siteCode = $("#siteCode").val();
+        $.ajax({
+            type: "post",
+            url: "imgVideoSearch",
+            data: {type: "videoSearch", relatedTab: otherTab, siteCode: siteCode, qt: qt, tab: tab, mode: 1},
+            dataType: "json",
+            success: function (data) {
+                if (data.success && data.resultList.length > 0) {
+                    var html = genPicOrVidioHtmlStr(constant_video, data);
+
+                    $("#relatedVideoId").html(html);
+                    $("#relatedVideoId").show();
+                    magnify("picxg", "a", "."+constant_video);
+
+                }
+            }
+        });
+    }
+
+
+</script>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=0&reference=FF24EC009ECDD326011BAE6E1C6254F7&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A4F93C0727A1D210686799129FCBC7EF555C2DC5D2FBDD56FE4045A9978EFC9D6&title=%E6%B9%96%E5%8D%97%E5%8F%96%E6%B6%88%E5%86%9C%E4%B8%9A%E6%88%B7%E5%8F%A3%E4%B8%8E%E9%9D%9E%E5%86%9C%E4%B8%9A%E6%88%B7%E5%8F%A3%E5%8C%BA%E5%88%AB&tab=all&siteCode=000000" target="_blank" class="fontlan" title="湖南取消农业户口与非农业户口区别">
+                            湖南取消农业<em>户口</em>与非农业<em>户口</em>区别
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                湖南取消农业<em>户口</em>与非农业<em>户口</em>区别 中央政府门户网站　www.gov.cn 2016-02-08 15:07 来源： 新华...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=0&reference=FF24EC009ECDD326011BAE6E1C6254F7&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A4F93C0727A1D210686799129FCBC7EF555C2DC5D2FBDD56FE4045A9978EFC9D6&title=%E6%B9%96%E5%8D%97%E5%8F%96%E6%B6%88%E5%86%9C%E4%B8%9A%E6%88%B7%E5%8F%A3%E4%B8%8E%E9%9D%9E%E5%86%9C%E4%B8%9A%E6%88%B7%E5%8F%A3%E5%8C%BA%E5%88%AB&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-02-08
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=1&reference=F5D83D930E45D57D17FE94D84483852D&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A79A06D4C487AAB125880C62A3166D9CE385FC5FCD121F9CC6B597948424005F6&title=%E5%8C%97%E4%BA%AC14%E6%97%A5%E8%B5%B7%E5%8F%97%E7%90%86%E2%80%9C%E6%9C%AC%E5%B8%82%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E2%80%9D%E6%88%B7%E5%8F%A3%E7%99%BB%E8%AE%B0%E7%94%B3%E8%AF%B7&tab=all&siteCode=000000" target="_blank" class="fontlan" title="北京14日起受理“本市无户口人员”户口登记申请">
+                            北京14日起受理“本市无<em>户口</em>人员”<em>户口</em>登记申请
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社北京10月13日电（记者 卢国强）北京市的户籍派出所从10月14日起开始受理北京市无<em>户口</em>人员登记<em>户口</em>的申请，包括“...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=1&reference=F5D83D930E45D57D17FE94D84483852D&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A79A06D4C487AAB125880C62A3166D9CE385FC5FCD121F9CC6B597948424005F6&title=%E5%8C%97%E4%BA%AC14%E6%97%A5%E8%B5%B7%E5%8F%97%E7%90%86%E2%80%9C%E6%9C%AC%E5%B8%82%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E2%80%9D%E6%88%B7%E5%8F%A3%E7%99%BB%E8%AE%B0%E7%94%B3%E8%AF%B7&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-10-13
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=2&reference=EC8CF25051CAF9AD86E1E0BEA74ABACB&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7D1ECBCFB9B1AF4FF2&title=%E2%80%9C%E6%88%B7%E5%8F%A3%E6%A2%A6%E2%80%9D%E5%A6%82%E4%BD%95%E5%9C%86%3F%E2%80%94%E2%80%94%E8%81%9A%E7%84%A6%E6%88%91%E5%9B%BD%E5%87%BA%E5%8F%B0%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E8%90%BD%E6%88%B7%E6%94%BF%E7%AD%96&tab=all&siteCode=000000" target="_blank" class="fontlan" title="“户口梦”如何圆?——聚焦我国出台无户口人员落户政策">
+                            “<em>户口</em>梦”如何圆?——聚焦我国出台无<em>户口</em>人员落户政策
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社北京1月14日电 “黑户”问题由来已久，成为我国社会治理的“盲点”。国务院办公厅14日印发的《关于解决无<em>户口</em>人员登...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=2&reference=EC8CF25051CAF9AD86E1E0BEA74ABACB&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7D1ECBCFB9B1AF4FF2&title=%E2%80%9C%E6%88%B7%E5%8F%A3%E6%A2%A6%E2%80%9D%E5%A6%82%E4%BD%95%E5%9C%86%3F%E2%80%94%E2%80%94%E8%81%9A%E7%84%A6%E6%88%91%E5%9B%BD%E5%87%BA%E5%8F%B0%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E8%90%BD%E6%88%B7%E6%94%BF%E7%AD%96&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-01-14
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=3&reference=8418E80FF19898949405BE06CB314993&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A998952D92D4BE80A5880C62A3166D9CE6B74E9451A71ADB99A772977A791876E&title=%E5%85%AC%E5%AE%89%E9%83%A8%3A2016%E5%B9%B4%E5%85%A8%E5%9B%BD%E5%8F%88%E6%9C%89143.5%E4%B8%87%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E4%B8%8A%E4%BA%86%E6%88%B7%E5%8F%A3&tab=all&siteCode=000000" target="_blank" class="fontlan" title="公安部:2016年全国又有143.5万无户口人员登记上了户口">
+                            公安部:2016年全国又有143.5万无<em>户口</em>人员登记上了<em>户口</em>
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                所有无<em>户口</em>人员均能依法落户 去年又有一百四十多万登记上户 凡是无<em>户口</em>人员，不管是什么时候、什么原因产生的，都要及时为他们...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=3&reference=8418E80FF19898949405BE06CB314993&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A998952D92D4BE80A5880C62A3166D9CE6B74E9451A71ADB99A772977A791876E&title=%E5%85%AC%E5%AE%89%E9%83%A8%3A2016%E5%B9%B4%E5%85%A8%E5%9B%BD%E5%8F%88%E6%9C%89143.5%E4%B8%87%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E4%B8%8A%E4%BA%86%E6%88%B7%E5%8F%A3&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2017-02-13
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=4&reference=003CBE262239B50CDA232E2545B7E399&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7DDD00186EA7594179&title=%E5%9B%BD%E5%8A%9E%E5%8D%B0%E5%8F%91%E3%80%8A%E5%85%B3%E4%BA%8E%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%84%8F%E8%A7%81%E3%80%8B&tab=all&siteCode=000000" target="_blank" class="fontlan" title="国办印发《关于解决无户口人员登记户口问题的意见》">
+                            国办印发《关于解决无<em>户口</em>人员登记<em>户口</em>问题的意见》
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社北京1月14日电 国务院办公厅日前印发《关于解决无<em>户口</em>人员登记<em>户口</em>问题的意见》（以下简称《意见》），提出了解决无户...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=4&reference=003CBE262239B50CDA232E2545B7E399&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7DDD00186EA7594179&title=%E5%9B%BD%E5%8A%9E%E5%8D%B0%E5%8F%91%E3%80%8A%E5%85%B3%E4%BA%8E%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%84%8F%E8%A7%81%E3%80%8B&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-01-14
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=5&reference=DB02061DAB94C9DB319C68AD194627E9&url=816D9628B2B6451D479EDC1E9A1E79538B9B0C08D4D751357847262B2246318014E98EF2F4DFFBDFFD41C16DE65A795AB2F4033E2D2CC6443E11AA46E315677D&title=%E6%94%BF%E5%BA%9C%E7%BD%91%E7%AB%99%E6%B8%85%E7%90%86%E2%80%9C%E6%88%B7%E5%8F%A3%E2%80%9D%E9%98%B2%E5%B1%B1%E5%AF%A8&tab=all&siteCode=000000" target="_blank" class="fontlan" title="政府网站清理“户口”防山寨">
+                            政府网站清理“<em>户口</em>”防山寨
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                我国首次就政府网站域名管理发布专项文件，严准入、去“山寨”，严整治、强安全，严监管、重规范，向政府网站域名管理不善、被仿...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=5&reference=DB02061DAB94C9DB319C68AD194627E9&url=816D9628B2B6451D479EDC1E9A1E79538B9B0C08D4D751357847262B2246318014E98EF2F4DFFBDFFD41C16DE65A795AB2F4033E2D2CC6443E11AA46E315677D&title=%E6%94%BF%E5%BA%9C%E7%BD%91%E7%AB%99%E6%B8%85%E7%90%86%E2%80%9C%E6%88%B7%E5%8F%A3%E2%80%9D%E9%98%B2%E5%B1%B1%E5%AF%A8&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2018-10-11
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=6&reference=37D03EBC63EEEF07F69117A75103B716&url=816D9628B2B6451D479EDC1E9A1E79538B9B0C08D4D751353B10BD6E5B4D43E3AB84FF6989DEC016FDA51513C546B2B6820CCA66B37461C13E11AA46E315677D&title=%E6%88%B7%E5%8F%A3%E7%99%BB%E8%AE%B0%2C%E4%B8%80%E4%B8%AA%E9%83%BD%E4%B8%8D%E8%83%BD%E5%B0%91&tab=all&siteCode=000000" target="_blank" class="fontlan" title="户口登记,一个都不能少">
+                            <em>户口</em>登记,一个都不能少
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <a href="view?qt=%E6%88%B7%E5%8F%A3&location=6&reference=37D03EBC63EEEF07F69117A75103B716&url=816D9628B2B6451D479EDC1E9A1E79538B9B0C08D4D751353B10BD6E5B4D43E3AB84FF6989DEC016FDA51513C546B2B6820CCA66B37461C13E11AA46E315677D&title=%E6%88%B7%E5%8F%A3%E7%99%BB%E8%AE%B0%2C%E4%B8%80%E4%B8%AA%E9%83%BD%E4%B8%8D%E8%83%BD%E5%B0%91&tab=all&siteCode=000000" target="_blank">
+                                <img src="img?reference=37D03EBC63EEEF07F69117A75103B716&index=cps&type=1&imgType=.jpg&siteCode=000000" width="140" height="83" alt=""/>
+                            </a>
+
+                            <div class="txtpic2">
+                                2015年12月，中央深改组第十九次会议审议通过《关于解决无<em>户口</em>人员登记<em>户口</em>问题的意见》。完善<em>户口</em>登记政策，做好分类实施...
+                            </div>
+
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=6&reference=37D03EBC63EEEF07F69117A75103B716&url=816D9628B2B6451D479EDC1E9A1E79538B9B0C08D4D751353B10BD6E5B4D43E3AB84FF6989DEC016FDA51513C546B2B6820CCA66B37461C13E11AA46E315677D&title=%E6%88%B7%E5%8F%A3%E7%99%BB%E8%AE%B0%2C%E4%B8%80%E4%B8%AA%E9%83%BD%E4%B8%8D%E8%83%BD%E5%B0%91&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2017-11-27
+                            </div>
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=7&reference=8884D3A54FAAF70AFE86A999C0F814F2&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A998952D92D4BE80AFFF77BC1BF608CAB6B74E9451A71ADB9A304450336B292B6&title=%E2%80%9C%E5%85%AC%E5%AE%89%E6%94%B9%E9%9D%A9%E4%B8%A4%E5%B9%B4%E9%97%B4%E2%80%9D%3A2016%E5%B9%B4%E5%8F%88%E6%9C%89140%E5%A4%9A%E4%B8%87%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E4%B8%8A%E4%BA%86%E6%88%B7%E5%8F%A3&tab=all&siteCode=000000" target="_blank" class="fontlan" title="“公安改革两年间”:2016年又有140多万无户口人员登记上了户口">
+                            “公安改革两年间”:2016年又有140多万无<em>户口</em>人员登记上了<em>户口</em>
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                凡是无<em>户口</em>人员，不管是什么时候、什么原因产生的，都要及时为他们依法办理<em>户口</em>登记；不允许为公民登记<em>户口</em>设置障碍，不允许人为...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=7&reference=8884D3A54FAAF70AFE86A999C0F814F2&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A998952D92D4BE80AFFF77BC1BF608CAB6B74E9451A71ADB9A304450336B292B6&title=%E2%80%9C%E5%85%AC%E5%AE%89%E6%94%B9%E9%9D%A9%E4%B8%A4%E5%B9%B4%E9%97%B4%E2%80%9D%3A2016%E5%B9%B4%E5%8F%88%E6%9C%89140%E5%A4%9A%E4%B8%87%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E4%B8%8A%E4%BA%86%E6%88%B7%E5%8F%A3&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2017-02-12
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=8&reference=3443E986BD80CA6A9050835B2614D585&url=816D9628B2B6451D479EDC1E9A1E7953285BCA6B254DDE3EA91D460D1302851C613E71D02DFAEF2019A1A0F14DE40E9559D82FDAAF836FA06E0E1295F3DADBE1&title=%E5%9B%BD%E5%8A%A1%E9%99%A2%E5%8A%9E%E5%85%AC%E5%8E%85%E5%85%B3%E4%BA%8E%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%84%8F%E8%A7%81&tab=all&siteCode=000000" target="_blank" class="fontlan" title="国务院办公厅关于解决无户口人员登记户口问题的意见">
+                            国务院办公厅关于解决无<em>户口</em>人员登记<em>户口</em>问题的意见
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                国务院办公厅关于解决无<em>户口</em>人员 登记<em>户口</em>问题的意见 国办发〔2015〕96号　　 各省、自治区、直辖市人民政府，国务院各...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=8&reference=3443E986BD80CA6A9050835B2614D585&url=816D9628B2B6451D479EDC1E9A1E7953285BCA6B254DDE3EA91D460D1302851C613E71D02DFAEF2019A1A0F14DE40E9559D82FDAAF836FA06E0E1295F3DADBE1&title=%E5%9B%BD%E5%8A%A1%E9%99%A2%E5%8A%9E%E5%85%AC%E5%8E%85%E5%85%B3%E4%BA%8E%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%84%8F%E8%A7%81&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2015-12-31
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=9&reference=E616296D2C78285984693C20EA1B9DC7&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48AEBA22F6BB172ADC92EB01BACD3E1AA702D88F4718E1396D9E7A2ADCB45166E51&title=%E7%A6%8F%E5%BB%BA%E7%9C%81%E5%87%BA%E5%8F%B0%E5%AE%9E%E6%96%BD%E6%84%8F%E8%A7%81%E5%85%A8%E9%9D%A2%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98&tab=all&siteCode=000000" target="_blank" class="fontlan" title="福建省出台实施意见全面解决无户口人员登记户口问题">
+                            福建省出台实施意见全面解决无<em>户口</em>人员登记<em>户口</em>问题
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                一本薄薄的<em>户口</em>簿，连着千家万户，关系着百姓生活的方方面面。对于没有<em>户口</em>的“黑户”而言，不仅就学就业受阻，连社会保障也难取...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=9&reference=E616296D2C78285984693C20EA1B9DC7&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48AEBA22F6BB172ADC92EB01BACD3E1AA702D88F4718E1396D9E7A2ADCB45166E51&title=%E7%A6%8F%E5%BB%BA%E7%9C%81%E5%87%BA%E5%8F%B0%E5%AE%9E%E6%96%BD%E6%84%8F%E8%A7%81%E5%85%A8%E9%9D%A2%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-06-30
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=10&reference=57CB599AAA512F99613DE22EF5D93D1D&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7D768F0233E1F93DE0&title=%E5%9B%BE%E8%A7%A3%EF%BC%9A%E5%9B%BD%E5%8A%A1%E9%99%A2%E5%8A%9E%E5%85%AC%E5%8E%85%E5%85%B3%E4%BA%8E%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%20%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%84%8F%E8%A7%81&tab=all&siteCode=000000" target="_blank" class="fontlan" title="图解：国务院办公厅关于解决无户口 人员登记户口问题的意见">
+                            图解：国务院办公厅关于解决无<em>户口</em> 人员登记<em>户口</em>问题的意见
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <a href="view?qt=%E6%88%B7%E5%8F%A3&location=10&reference=57CB599AAA512F99613DE22EF5D93D1D&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7D768F0233E1F93DE0&title=%E5%9B%BE%E8%A7%A3%EF%BC%9A%E5%9B%BD%E5%8A%A1%E9%99%A2%E5%8A%9E%E5%85%AC%E5%8E%85%E5%85%B3%E4%BA%8E%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%20%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%84%8F%E8%A7%81&tab=all&siteCode=000000" target="_blank">
+                                <img src="img?reference=57CB599AAA512F99613DE22EF5D93D1D&index=cps&type=1&imgType=.jpg&siteCode=000000" width="140" height="83" alt=""/>
+                            </a>
+
+
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=10&reference=57CB599AAA512F99613DE22EF5D93D1D&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7D768F0233E1F93DE0&title=%E5%9B%BE%E8%A7%A3%EF%BC%9A%E5%9B%BD%E5%8A%A1%E9%99%A2%E5%8A%9E%E5%85%AC%E5%8E%85%E5%85%B3%E4%BA%8E%E8%A7%A3%E5%86%B3%E6%97%A0%E6%88%B7%E5%8F%A3%20%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%84%8F%E8%A7%81&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-01-14
+                            </div>
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=11&reference=D47BFBCA0CB85A20667B05FE187FEE22&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7D826E64E48164EF8C&title=%E5%88%87%E5%AE%9E%E4%BF%9D%E9%9A%9C%E6%AF%8F%E4%B8%AA%E5%85%AC%E6%B0%91%E4%BE%9D%E6%B3%95%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E2%80%94%E2%80%94%E5%85%AC%E5%AE%89%E9%83%A8%E7%AD%89%E4%BA%94%E9%83%A8%E9%97%A8%E6%9C%89%E5%85%B3%E8%B4%9F%E8%B4%A3%E4%BA%BA%E5%B0%B1%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E7%AD%94%E8%AE%B0%E8%80%85%E9%97%AE&tab=all&siteCode=000000" target="_blank" class="fontlan" title="切实保障每个公民依法登记户口——公安部等五部门有关负责人就无户口人员登记户口答记者问">
+                            切实保障每个公民依法登记<em>户口</em>——公安部等五部门有关负责人就无<em>户口</em>人员登记<em>户口</em>答记者问
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社北京1月14日电 近日，国务院办公厅印发《关于解决无<em>户口</em>人员登记<em>户口</em>问题的意见》（以下简称《意见》）。日前，公安部...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=11&reference=D47BFBCA0CB85A20667B05FE187FEE22&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A3B54CC742F969FB321AAD59A1243B07F44BC874CB716EF7D826E64E48164EF8C&title=%E5%88%87%E5%AE%9E%E4%BF%9D%E9%9A%9C%E6%AF%8F%E4%B8%AA%E5%85%AC%E6%B0%91%E4%BE%9D%E6%B3%95%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E2%80%94%E2%80%94%E5%85%AC%E5%AE%89%E9%83%A8%E7%AD%89%E4%BA%94%E9%83%A8%E9%97%A8%E6%9C%89%E5%85%B3%E8%B4%9F%E8%B4%A3%E4%BA%BA%E5%B0%B1%E6%97%A0%E6%88%B7%E5%8F%A3%E4%BA%BA%E5%91%98%E7%99%BB%E8%AE%B0%E6%88%B7%E5%8F%A3%E7%AD%94%E8%AE%B0%E8%80%85%E9%97%AE&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-01-14
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=12&reference=8145519044690E75E4B9CFCEE85F2E53&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48AE5AD76D49D7BFD39E0F77F04204AE4EC998FD5C11E9211895225D3298DE5DE2C&title=%E6%95%85%E5%AE%AB%E6%96%B0%E5%A2%9E5%E4%B8%87%E5%A4%9A%E4%BB%B6%E2%80%9C%E6%9C%89%E6%88%B7%E5%8F%A3%E2%80%9D%E8%97%8F%E5%93%81&tab=all&siteCode=000000" target="_blank" class="fontlan" title="故宫新增5万多件“有户口”藏品">
+                            故宫新增5万多件“有<em>户口</em>”藏品
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社北京3月29日电（白瀛 何欣禹）故宫博物院经过三年藏品清理工作，增加了55132件登记藏品，涉及乾隆御稿、尺牍、甲...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=12&reference=8145519044690E75E4B9CFCEE85F2E53&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48AE5AD76D49D7BFD39E0F77F04204AE4EC998FD5C11E9211895225D3298DE5DE2C&title=%E6%95%85%E5%AE%AB%E6%96%B0%E5%A2%9E5%E4%B8%87%E5%A4%9A%E4%BB%B6%E2%80%9C%E6%9C%89%E6%88%B7%E5%8F%A3%E2%80%9D%E8%97%8F%E5%93%81&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2017-03-29
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=13&reference=B4CE9B35F84DF1400D909D2F23130E89&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A5D944848D4E21AF8A2EF48D7D6E2C418EAC31896719E4CA9B73204F24421DDDB&title=%E5%8C%97%E4%BA%AC%E7%BB%99%E5%BF%AB%E9%80%92%E4%B8%89%E8%BD%AE%E8%BD%A6%E2%80%9C%E4%B8%8A%E6%88%B7%E5%8F%A3%E2%80%9D&tab=all&siteCode=000000" target="_blank" class="fontlan" title="北京给快递三轮车“上户口”">
+                            北京给快递三轮车“上<em>户口</em>”
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                统一标准、统一购买交通意外险、统一制发驾驶人安全卡 北京给快递三轮车“上<em>户口</em>” 厢体上半部分统一为蓝底白字的“快递”标识...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=13&reference=B4CE9B35F84DF1400D909D2F23130E89&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A5D944848D4E21AF8A2EF48D7D6E2C418EAC31896719E4CA9B73204F24421DDDB&title=%E5%8C%97%E4%BA%AC%E7%BB%99%E5%BF%AB%E9%80%92%E4%B8%89%E8%BD%AE%E8%BD%A6%E2%80%9C%E4%B8%8A%E6%88%B7%E5%8F%A3%E2%80%9D&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-12-05
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=14&reference=9D1E27F5830F50A0B44FC4D8D59F0575&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A5D944848D4E21AF8E0F77F04204AE4ECA64435B4828A8418069DB310A70A8E47&title=%E5%A4%A9%E6%B4%A5%E7%BB%9F%E4%B8%80%E5%9F%8E%E4%B9%A1%E6%88%B7%E5%8F%A3%E7%99%BB%E8%AE%B0%E6%98%8E%E5%B9%B4%E8%B5%B7%E5%8F%96%E6%B6%88%E5%86%9C%E4%B8%9A%E4%B8%8E%E9%9D%9E%E5%86%9C%E4%B8%9A%E6%88%B7%E5%8F%A3%E5%8C%BA%E5%88%86&tab=all&siteCode=000000" target="_blank" class="fontlan" title="天津统一城乡户口登记明年起取消农业与非农业户口区分">
+                            天津统一城乡<em>户口</em>登记明年起取消农业与非农业<em>户口</em>区分
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社天津12月29日电（记者 刘林）记者29日从天津市公安局了解到，天津市自2017年1月1日起，将在全市范围内统一城...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=14&reference=9D1E27F5830F50A0B44FC4D8D59F0575&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A5D944848D4E21AF8E0F77F04204AE4ECA64435B4828A8418069DB310A70A8E47&title=%E5%A4%A9%E6%B4%A5%E7%BB%9F%E4%B8%80%E5%9F%8E%E4%B9%A1%E6%88%B7%E5%8F%A3%E7%99%BB%E8%AE%B0%E6%98%8E%E5%B9%B4%E8%B5%B7%E5%8F%96%E6%B6%88%E5%86%9C%E4%B8%9A%E4%B8%8E%E9%9D%9E%E5%86%9C%E4%B8%9A%E6%88%B7%E5%8F%A3%E5%8C%BA%E5%88%86&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-12-29
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=15&reference=464C507E4E53F1C2CED343A0ADFC1230&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A886576FD119A70422DA8EA029235F29B17CAF710D46542644F1E588B0FAD4295&title=%E5%A4%A9%E6%B4%A5%3A8%E7%B1%BB%E6%88%B7%E5%8F%A3%E5%8F%98%E6%9B%B4%20%E7%BD%91%E4%B8%8A%E5%B0%B1%E8%83%BD%E5%8A%9E&tab=all&siteCode=000000" target="_blank" class="fontlan" title="天津:8类户口变更 网上就能办">
+                            天津:8类<em>户口</em>变更 网上就能办
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                这8类<em>户口</em>变更 网上就能办 涉及姓名、出生地、籍贯、民族、身高、血型、宗教信仰、职业等<em>户口</em>登记项目 想要更改姓名，换了工...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=15&reference=464C507E4E53F1C2CED343A0ADFC1230&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A886576FD119A70422DA8EA029235F29B17CAF710D46542644F1E588B0FAD4295&title=%E5%A4%A9%E6%B4%A5%3A8%E7%B1%BB%E6%88%B7%E5%8F%A3%E5%8F%98%E6%9B%B4%20%E7%BD%91%E4%B8%8A%E5%B0%B1%E8%83%BD%E5%8A%9E&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2019-11-01
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=16&reference=2F2AD2CB63A1F635753FD56A3B1B84B8&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A4B1A95EA9AEC1EEFCC5EF2544E357FA3BB1F0F4ADF1CFCE12442FE2B420339C7&title=%E4%BA%91%E5%8D%97%E5%80%9F%E5%8A%9B%E2%80%9C%E4%B8%93%E5%AE%B6%2B%E5%BF%97%E6%84%BF%E8%80%85%E2%80%9D%E4%B8%BA%E5%8F%A4%E7%B1%8D%E2%80%9C%E4%B8%8A%E6%88%B7%E5%8F%A3%E2%80%9D&tab=all&siteCode=000000" target="_blank" class="fontlan" title="云南借力“专家+志愿者”为古籍“上户口”">
+                            云南借力“专家+志愿者”为古籍“上<em>户口</em>”
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社昆明9月25日电（记者许万虎、赵珮然）2017“中华古籍普查文化志愿服务行动·云南行”活动近日收官。两个月来，古籍...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=16&reference=2F2AD2CB63A1F635753FD56A3B1B84B8&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A4B1A95EA9AEC1EEFCC5EF2544E357FA3BB1F0F4ADF1CFCE12442FE2B420339C7&title=%E4%BA%91%E5%8D%97%E5%80%9F%E5%8A%9B%E2%80%9C%E4%B8%93%E5%AE%B6%2B%E5%BF%97%E6%84%BF%E8%80%85%E2%80%9D%E4%B8%BA%E5%8F%A4%E7%B1%8D%E2%80%9C%E4%B8%8A%E6%88%B7%E5%8F%A3%E2%80%9D&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2017-09-25
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=17&reference=909C670366A9E674665519653AE3E194&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A39001CD7F6F8B968BE64896D16B218962504F03311AC0AD6A07223BB4130FD59&title=%E6%B5%99%E6%B1%9F%3A%E7%9C%81%E5%86%85%E6%88%B7%E5%8F%A3%E8%BF%81%E7%A7%BB%E4%B8%80%E7%AB%99%E5%BC%8F%E5%8A%9E%E7%90%86&tab=all&siteCode=000000" target="_blank" class="fontlan" title="浙江:省内户口迁移一站式办理">
+                            浙江:省内<em>户口</em>迁移一站式办理
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                记者从省公安厅获悉，为进一步推动“最多跑一次”改革，方便群众办理户籍业务，自12月26日起，我省全面实施省内<em>户口</em>迁移一站...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=17&reference=909C670366A9E674665519653AE3E194&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A39001CD7F6F8B968BE64896D16B218962504F03311AC0AD6A07223BB4130FD59&title=%E6%B5%99%E6%B1%9F%3A%E7%9C%81%E5%86%85%E6%88%B7%E5%8F%A3%E8%BF%81%E7%A7%BB%E4%B8%80%E7%AB%99%E5%BC%8F%E5%8A%9E%E7%90%86&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2017-12-27
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=18&reference=E28C2C021EF27CCAFC201025A0EDFF2B&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A5D944848D4E21AF852365E182415C3058CC7912C4FCDD86AFF067D92C3B13098&title=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81%E6%88%B7%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%B0%86%E2%80%9C%E4%B8%80%E5%9C%B0%E5%8A%9E%E7%BB%93%E2%80%9D&tab=all&siteCode=000000" target="_blank" class="fontlan" title="黑龙江省户口迁移将“一地办结”">
+                            黑龙江省<em>户口</em>迁移将“一地办结”
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社哈尔滨12月23日电（记者 梁书斌）记者从黑龙江省公安厅了解到，从12月26日起，黑龙江省警方将全面启动<em>户口</em>迁移一...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=18&reference=E28C2C021EF27CCAFC201025A0EDFF2B&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48A5D944848D4E21AF852365E182415C3058CC7912C4FCDD86AFF067D92C3B13098&title=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81%E6%88%B7%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%B0%86%E2%80%9C%E4%B8%80%E5%9C%B0%E5%8A%9E%E7%BB%93%E2%80%9D&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2016-12-23
+                            </div>
+
+                    </div>
+                </div>
+                <div class="news clearfix">
+                    <div class="title">
+
+
+                        <a href="view?qt=%E6%88%B7%E5%8F%A3&location=19&reference=0AE4DDD9DFCB89AE675F719E72412905&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48ADF07E51DDA0B5C99B544DA0E0DF6C59CADC88A32AE9CC232E89745ACB9436096&title=%E8%BE%BD%E5%AE%81%E5%AE%9E%E7%8E%B0%E6%88%B7%E5%8F%A3%E8%BF%81%E7%A7%BB%E4%B8%80%E5%9C%B0%E5%8A%9E%E7%BB%93&tab=all&siteCode=000000" target="_blank" class="fontlan" title="辽宁实现户口迁移一地办结">
+                            辽宁实现<em>户口</em>迁移一地办结
+                        </a>
+                    </div>
+
+                    <div class="content">
+                            <div class="txt">
+                                新华社沈阳7月28日电（记者李铮）有迁移<em>户口</em>需求的辽宁居民再也不用东奔西走了。辽宁省公安厅治安总队总队长邵希默表示，从7...
+                            </div>
+                            <div>
+                                <a href="view?qt=%E6%88%B7%E5%8F%A3&location=19&reference=0AE4DDD9DFCB89AE675F719E72412905&url=816D9628B2B6451D479EDC1E9A1E7953FCE754D5AFBEB48ADF07E51DDA0B5C99B544DA0E0DF6C59CADC88A32AE9CC232E89745ACB9436096&title=%E8%BE%BD%E5%AE%81%E5%AE%9E%E7%8E%B0%E6%88%B7%E5%8F%A3%E8%BF%81%E7%A7%BB%E4%B8%80%E5%9C%B0%E5%8A%9E%E7%BB%93&tab=all&siteCode=000000" target="_blank"
+                                   class="fontlan"> 中国政府网</a>
+                                    - 2017-07-28
+                            </div>
+
+                    </div>
+                </div>
+<style>
+    .color_related_degree {
+        color: #ccc
+    }
+</style>
+<div class="pages clearfix" id="Pagination"></div>
+<script type="text/javascript">
+        function searchPagination(id, totlePage, page, pageSize) {
+        var pageNum = parseInt(totlePage / pageSize);
+        if (totlePage % pageSize != 0) {
+            pageNum += 1;
+        }
+        var pageUrl = window.location.href;
+        pageUrl=delParam(pageUrl,"qt");pageUrl=delParam(pageUrl,"tab");pageUrl=delParam(pageUrl,"siteCode");
+        pageUrl=addParam(pageUrl,"qt",qt);pageUrl=addParam(pageUrl,"tab",database);pageUrl=addParam(pageUrl,"siteCode",siteCode);
+        pageUrl = delParam(pageUrl, "page");
+        $("#" + id).pagination(pageNum, {
+            num_edge_entries: 0,
+            num_display_entries: 10,
+            callback: function (pageNumber) {
+                if (page == (pageNumber +1)){
+                    return;
+                }
+                var url = pageUrl;
+                url += "&page=" + (pageNumber + 1);
+                window.open(url, "_self");
+            },
+            link_to: "javascript:void(0)",
+            current_page: page - 1,
+            prev_show_always: true,
+            next_show_always: true,
+            items_per_page: 1
+        });
+    }
+</script>
+
+<div id="bsDialog" title="地区选择" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable clearfix" style="width: auto; min-height: 93px; max-height: none; height: auto;">
+</div>
+<style type="text/css">
+
+    .ui-dialog-content {
+        font-size: 14px;
+    }
+
+    .ui-dialog-title {
+        font-size: 16px;
+    }
+
+    #bsDialog ul li {
+        float: left;
+        margin: 0 10px 10px 5px;
+    }
+
+    #bsDialog ul li:hover {
+        background-color: #C1C1C1;
+    }
+
+    #bsDialog ul li a {
+        display: block;
+        text-decoration: none;
+        color: #2d2f30;
+    }
+
+    #bsDialog ul li.selected a {
+        background: #c83333;
+        color: #fff;
+    }
+
+    #table a:hover {
+        text-decoration: underline;
+        color: #c83333;
+    }
+
+    #table .addr {
+        width: 900px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+<script type="text/javascript">
+    var bsDialog = $("#bsDialog").dialog({
+        autoOpen: false,
+        width: 1200,
+        modal: true,
+        position: {
+            using: function (pos) {
+                var topOffset = $(this).css(pos).offset().top;
+                if (topOffset = 0 || topOffset > 0) {
+                    $(this).css('top', 10);
+                }
+            }
+        },
+        close: function (event, ui) {
+            $("#bsDialog").html("");
+        }
+    });
+
+    var bsTab, xian, xiang, cun;
+
+    function opDialog(title) {
+        //固定位置防止页面滚动
+        $('#bsDialog').parent().css({position: "fixed"});
+        $('#bsDialog').append("<div id='select'></div >");
+        bsDialog.dialog({title: "地区选择 • " + title});
+        var url = location.search;
+        if (!getParamVal(url, "siteCode")){
+            url = addParam(url,"siteCode","000000")
+        }
+        var searchUrl =  url
+        var XIAN = getParamVal(url, "XIAN");
+        url = url.replace("XIAN=", "xian=");
+        url += "&field=XIAN&qtTitle=" + encodeURIComponent(title);
+        bsTab = undefined;
+        if (regionFn(url) !== "") {
+            bsDialog.dialog("open");
+            $('#bsDialog').append("<table id='table'></table>");
+            bsTab = $('#table').DataTable({
+                dom: 'rtip',
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": "list" + searchUrl,
+                    "dataSrc": "data",
+                    "data": function (d) {
+                        d.xian = xian;
+                        d.xiang = xiang;
+                        d.cun = cun;
+                        d.qtTitle = title;
+                    }
+                },
+                bPaginate: true, //翻页功能
+                aLengthMenu: [5, 10, 13, 17], //更改显示记录数选项
+                iDisplayLength: 17, //默认显示的记录数
+                bSort: false, //排序功能
+                bInfo: true,//页脚信息
+                bAutoWidth: true,//自动宽度
+                destroy: true,//防止重新加载报错
+                scrollY: "400px",
+                scrollCollapse: true,
+                columns: [
+                    {
+                        data: "transactAddr", width: "882px", title: "办理地点",  render: function (data, type, row) {
+
+                            var fwdlx = "暂无";
+                            if (row.cun && ""!=row.cun) {
+                                fwdlx = row.cun
+                            } else if (row.xiang && ""!=row.xiang){
+                                fwdlx = row.xiang
+                            }  else if (row.xian && ""!= row.xian){
+                                fwdlx = row.xian
+                            } else if (row.shi && ""!= row.shi){
+                                fwdlx = row.shi
+                            }
+                            if( !data || "" == data){
+                                data = fwdlx
+                            }
+
+                            return "<div class='addr'>【" + fwdlx + "】<a href='" + row.viewUrl + "' title='" + data + "' target='_blank'>" + data + "</a><div>";
+                        }
+                    },
+                    {data: "deptName", width: "198px", title: "实施机关"}
+                ],
+                columnDefs: [{//表格默认属性
+                    "defaultContent": "-",
+                    "targets": "_all"
+                }],
+                language: {
+                    "url": "search/js/Chinese.json"
+                },
+                "initComplete": function(settings, json) {
+                    view2Post();
+                }
+            });
+        }
+        if (XIAN !== undefined) {
+            $("#bsDialog ul li a").each(function () {
+                if ($(this).text() === XIAN) {
+                    console.log($(this));
+                    $(this).click();
+                }
+            });
+        }
+    }
+
+    function regionFn(url, obj) {
+        xian = undefined;
+        xiang = undefined;
+        cun = undefined;
+        xian = getParamVal(url, "xian");
+        xiang = getParamVal(url, "xiang");
+        cun = getParamVal(url, "cun");
+        if (bsTab !== undefined) {
+            bsTab.ajax.reload();
+        }
+        //活动样式更新
+        $(obj).addClass("selected").siblings().removeClass("selected");
+        $(obj).parent().parent().parent().nextAll().remove();
+        var html = '';
+        $.ajax({
+            url: "banshi" + url,
+            dataType: "json",
+            async: false,
+            success: function (json) {
+                if (JSON.stringify(json["XIAN"]) === "{}" || /{"[\u4e00-\u9fa5]{3,7}":1}/.test(JSON.stringify(json["XIAN"]))) {
+                    //统计XIAN无结果时直接跳转
+                    if (url) {
+                        openWindowWithPostRequest("jump",url)
+                    }
+                } else {
+                    for (var le in json) {
+                        var item = json[le];
+                        html += '<div>';
+                        html += '<div style="float: left;width: 10%;">';
+                        html += '<strong style="float: right;">';
+                        //url拼接
+                        switch (le) {
+                            case "XIAN":
+                                html += "区/县：";
+                                url = replaceParamVal(url, 'field', 'XIANG');
+                                url = delParam(url, "xian");
+                                url += "&xian=";
+                                break;
+                            case "XIANG":
+                                html += "街道/乡镇：";
+                                url = replaceParamVal(url, 'field', 'CUN');
+                                url += "&xiang=";
+                                break;
+                            case "CUN":
+                                html += "社区/村：";
+                                url += "&cun=";
+                                break;
+                        }
+                        html += '</strong>';
+                        html += '</div>';
+                        html += '<div style="float: left;width: 85%;">';
+                        html += '<ul>';
+                        var qu=beijing.concat();
+                        for (var name in item) {
+                            var num = item[name];
+                            if (num === 1) {
+                                //本级统计数量为1时直接跳转
+                                var jump = "jump" + url + encodeURIComponent(name);
+                                html += '<li><a href="' + jump + '" target="target">' + name + '</a></li>';
+                            } else {
+                                //递归调用
+                                html += '<li onclick="regionFn(\'' + url + name + '\',this)"><a href="javascript:void(0);" onclick="return false;">' + name + '</a></li>';
+                            }
+                            if(le==="XIAN"){
+                                qu.splice(qu.indexOf(name),1);
+                            }
+                        }
+                        if (le === "XIAN") {
+                            for (var i in qu) {
+                                html += "<span style='float: left;margin: 0 10px 10px 5px;'>";
+                                html += "<a href='javascript:;' style='color: #b0b3b5;cursor:default'>" + qu[i] + "</a>";
+                                html += "</span>";
+                            }
+                        }
+
+                        html += '</ul>';
+                        html += '</div>';
+                        html += '</div>';
+                    }
+                }
+            }
+        });
+        $('#select').append(html);
+        return html;
+    }
+</script>
+</div>
+<div class="aside fr">
+
+    
+
+
+
+<div class="reclist" style="display: none">
+    <div class="title b">知识图谱</div>
+    <div id="querySummaryImg" style='width: 350px;height:250px;' align="center">
+    </div>
+</div>
+
+<script type="text/javascript">
+        function querySummaryPlugin() {
+        var querySummary = "";
+        var qSummary = querySummary.split(/[,，]/);
+        var nodes="";
+        var links="";
+        var  qtReplaceHs = qt.replace(/\"/g,"").replace(/\'/g,"")
+        if(qSummary.length>0){
+         nodes = '[{"category":0,"name":"'+qtReplaceHs+'","value":10,"label":"'+qtReplaceHs+'"},';
+         links = '[';
+            for (var num =0; num<qSummary.length; num++) {
+                if(qtReplaceHs!=qSummary[num]){
+                    nodes+='{"category":1,"name":"'+qSummary[num]+'","value":'+Math.floor(Math.random()*10)+'},';
+                    links+='{"source":"'+qSummary[num]+'","target":"'+qtReplaceHs+'","weight":'+Math.floor(Math.random()*10)+'},';
+                }
+            }
+            nodes=nodes.substring(0,nodes.length-1)+"]";
+            links=links.substring(0,links.length-1)+"]";
+        }
+        nodes = eval('(' + nodes + ')');
+        links = eval('(' + links + ')');
+        querySummaryFun(nodes, links, qtReplaceHs);
+    }
+
+    function querySummaryFun(nodes, links, qtReplaceHs) {
+        var option = {
+            title: {
+                // text: '双击搜索',
+                /* subtext: '数据来自顶尖时代', */
+                x: 'left',
+                y: 'bottom'
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    restore: {show: true},
+                    magicType: {show: true, type: ['force', 'chord']},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                show: false,
+                x: 'left',
+                data: ['', '']
+            },
+            series: [{
+                type: 'graph',
+                layout: 'force',
+                name: "Force tree",
+                force: {                     repulsion: 100,
+                    gravity: 0.03,
+                    edgeLength: 80,
+                    layoutAnimation: true
+                },
+                lineStyle: { 
+                    normal: {
+                        color: '#333',
+                        width: '1',
+                        type: 'solid', 
+                        curveness: 0.3, 
+                        opacity: 0.5
+                    },
+                    emphasis: {
+
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        label: {show: true},
+                        color: function () {
+                            return 'rgb('
+                                    + [Math.round(50+Math.random() * 200),
+                                        Math.round(50+Math.random() * 200),
+                                        Math.round(50+Math.random() * 200)]
+                                            .join(',') + ')';
+                        },
+                        borderType: 'solid', 
+                        borderWidth: 2, 
+                        opacity: 1
+                    }
+                },
+                label: { 
+                    normal: {
+                        show: true,
+                        position: 'inside',
+                        textStyle: { 
+                            color: '#000000', 
+                            fontStyle: 'normal',
+                            fontWeight: 'lighter',
+                            fontFamily: 'sans-serif', 
+                            fontSize: 13, 
+                        }
+                    },
+                    emphasis: {
+
+                    }
+                },
+                categories: [{name: ''}, {name: ''}, {name: ''}, {name: ''}],
+                symbol: 'circle',
+                symbolSize: 40,
+                roam: false,
+                nodes: nodes,
+                links: links
+            }]
+        };
+        var myChart = echarts.init(document.getElementById("querySummaryImg"));
+        myChart.setOption(option);
+        $("#querySummaryImg").parent("div").show();
+        var ecConfig = echarts.config;
+        myChart.on('click', function (param) {
+            if (param.name != qtReplaceHs) {
+                var siteCode = $("#siteCode").val();
+                url = "s?qt=" + encodeURIComponent(qtReplaceHs+" "+param.name) + "&siteCode=" + siteCode + "&tab=" + database;
+                window.open(url, "_self");
+            }
+        });
+    }
+
+</script>
+
+
+<div class="rec" id="recommend"></div>
+
+<script type="text/javascript">
+
+    function zntj(word) {
+        $.ajax({
+            type: "post",
+            url: "suggest",
+            async: true,
+            data: {siteCode: siteCode, qt: "" + word + "", tab: database, mode: 1, redTitleLength: 24},
+            dataType: "json",
+            success: function (data) {
+                if (qt==null || qt.trim()==""){
+                    return;
+                }
+                if (data.status == "TRUE") {
+                    var json = eval('(' + data.json + ')');
+                    if (data.response == "TRUE" && json.data.length > 0) {
+                        var dom = '<div class="title"><em>' + qt + '</em>的智能推荐</div>';
+                        var jsonData = json.data;
+                        var resultListLen = 0;
+                        $.each(jsonData, function (k, resultJson) {
+                            if (resultJson.response == "TRUE" && resultJson.resultList && resultJson.resultList != "" && resultJson.resultList.length > 0) {
+                                resultListLen += resultJson.resultList.length;
+                                dom += '<div class="reclist">';
+                                dom += '<div class="title b">' + resultJson.suggestShowName + '</div>';
+                                dom += '<ul class="list clearfix">';
+                                for (var i = 0; i < resultJson.resultList.length && i < 5; i++) {
+                                    var n = resultJson.resultList[i];
+                                    var displaytitle = n.title;
+                                    var encodeUrl = n.encodeUrl;
+                                    var encodeTitle = encodeURIComponent(n.title);
+                                    var location = i + 1;
+                                    var url = "view?qt=" + qtPasser + "&location=" + location + "&reference=" + n.reference + "&url=" + encodeUrl + "&title=" + encodeTitle + "&database=" + database + "&siteCode=" + siteCode;
+                                    dom += '<li><a href="' + url + '" target="_blank" title="'+ displaytitle +'">' + displaytitle + ' </a></li>';
+                                }
+                                dom += '</ul>';
+                                dom += '</div>';
+                            }
+                        });
+                        dom += '</div>';
+                        if (resultListLen > 0) {
+                            $("#recommend").append(dom);
+                        }
+                    }
+                }
+            }, error: function () {
+                console.log("智能推荐搜索失败!");
+            }
+        });
+    }
+
+</script>
+
+<div class="rec" id="count"></div>
+<script type="text/javascript">
+    
+    function tagFunc() {
+        var param = window.location.search;
+        param = delParam(param, "qt");
+        param = delParam(param, "tab");
+        param = delParam(param, "siteCode");
+        param = addParam(param, "qt", qt);
+        param = addParam(param, "tab", database);
+        param = addParam(param, "siteCode", siteCode);
+        var pid = {};
+        if (param.indexOf("pid=") == -1) {
+            pid.pid = "root";
+        }
+        $.ajax({
+            type: "post",
+            url: "tag" + param,
+            data: pid,
+            dataType: "json",
+            success: function (json) {
+                var tagList = json["tagList"];
+                var only = json["only"];
+                if (tagList && tagList.length > 0) {
+                    var dom = '<div class="title">统计信息</div>';
+                    var countFlag = false;
+                    $.each(tagList, function (key, val) {
+                        var result = val["result"];
+                        var field = val["field"];
+                        var dict = val["dict"];
+                        var tcid = {};
+                        for (var d in dict) {
+                            tcid[dict[d]] = d;
+                        }
+                        if (result.length > 0) {
+                            countFlag = true;
+                            dom += '<div class="reclist">';
+                            dom += '<div class="title b">';
+                            if ("highlight" in val && !only) {
+                                dom += val["highlight"] + '-';
+                            }
+                            dom += val["display"];
+                            dom += '<a href="javascript:void(0);" class="more countmore down fontlan">展开</a></div>';
+                            dom += '<ul class="list count clearfix">';
+                            for (var i in result) {
+                                var map = result[i];
+                                var k = map["key"];
+                                var ck = tcid[k] === undefined ? k : tcid[k];
+                                var v = map["val"];
+                                var url = window.location.href;
+                                url = delParam(url, "qt");
+                                url = delParam(url, "tab");
+                                url = delParam(url, "siteCode");
+                                url = addParam(url, "qt", qt);
+                                url = addParam(url, "tab",database);
+                                url = addParam(url, "siteCode",siteCode);
+                                if (only) {
+                                    for (var j = 0; j < tagList.length; j++) {
+                                        url = delParam(url, tagList[j].field);
+                                    }
+                                    url = delParam(url, "rv");
+                                    url = addParam(url, field, ck);
+                                    url = addParam(url, "rv", field);
+                                } else {
+                                    url = delParam(url, "pid");
+                                    url = addParam(url, "pid", field);
+                                    url = delParam(url, field);
+                                    url = addParam(url, field, ck);
+                                }
+                                if ("highlight" in val && only && val["highlight"] == k) {
+                                    dom += '<li><a href="' + url + '" style="font-weight: bold" title="' + k + '">' + k + '<span>（' + v + '）</span></a></li>';
+                                } else {
+                                    dom += '<li><a href="' + url + '" title="' + k + '">' + k + '<span>（' + v + '）</span></a></li>';
+                                }
+                            }
+                            dom += '</ul>';
+                            dom += '</div>';
+                        }
+                    });
+                    if (countFlag){
+                        $("#count").append(dom);
+                        //刷新展开
+                        countmore();
+                    }
+
+                } else {
+                    console.log("tagWord is null");
+                }
+            }
+        });
+    }
+</script>
+<div id="interest" class="rec" style="display: none;"></div>
+<script type="text/javascript">
+    
+    function interestPlugin() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "cookieWord?&wordMaxLength=23",
+            dataType: "json",
+            success: function (data) {
+                var data = eval("(" + data + ")");
+                if (data && data.length > 0) {
+                    var qt = "";
+                    for (var i = 0; i < data.length && i < 3; i++) {
+                        var dqt = data[i].displayqt;
+                        if (dqt && dqt.trim().length > 0) {
+                            qt += data[i].displayqt + " OR ";
+                        }
+                    }
+                    qt = qt.substring(0, qt.lastIndexOf(' OR '));
+                    if (qt.length > 0) {
+                        interestInfo(qt);
+                    }
+                }
+            }
+        });
+    }
+
+
+    function interestInfo(qt) {
+        $.ajax({
+            type: "post",
+            url: "interest",
+            async: true,
+            data: {
+                siteCode: siteCode,
+                keyPlace: 1,
+                qt: qt,
+                tab: database,
+                pageSize: 5,
+                redTitleLength: 28,
+                combine: "MD5TITLE",
+                mode: 1
+            },
+            dataType: "json",
+            success: function (data) {
+                var data = data.resultList;
+                if (data && data != "") {
+
+                    var html = '<div class="title">您可能感兴趣的信息</div>';
+                    html += '<div class="reclist">';
+                    html += '<ul class="list clearfix">';
+
+                    for (var i = 0; i < data.length && i < 5; i++) {
+                        var doc = data[i];
+                        var displaytitle = doc.title;
+                        var encodeUrl = doc.encodeUrl;
+                        var encodeTitle = encodeURIComponent(doc.title);
+                        var location = i + 1;
+                        var url = "view?qt=" + qtPasser + "&location=" + location + "&reference=" + doc.reference + "&url=" + encodeUrl + "&title=" + encodeTitle + "&database=" + database + "&siteCode=" + siteCode;
+                        html += '<li><a href="' + url + '" target="_blank" title="' + displaytitle + '">' + displaytitle + ' </a></li>';
+                    }
+                    html += '</ul>';
+                    html += "</div>";
+
+                    $('#interest').html(html);
+                    $('#interest').show();
+                } else {
+                    console.log("interested is null");
+                }
+            }
+        });
+    }
+</script>
+<div class="rec pb30" id="history"></div>
+
+<script type="text/javascript">
+    
+    function searchcookieWord(wordJson) {
+        wordJson = eval('(' + wordJson + ')');
+        if (wordJson && wordJson != "" && wordJson.length > 0) {
+            var dom = '<div class="title">搜索历史 ';
+            dom += '<a href="javascript:void(0);" class="more countmore down fontlan">展开</a>';
+            dom += '</div>';
+            dom += '<ul class="list count clearfix">';
+            for (var i in wordJson) {
+                var url = "s?q=1&tab=" + database + "&qt=" + wordJson[i].wordqt + "&siteCode=" + siteCode;
+                dom += '<li><i></i> <a href="' + url + '" arget="_self">' + wordJson[i].displayqt + '</a></li>';
+            }
+            dom += '</ul>';
+            dom += '<span class="emptybtn" style="cursor: pointer;" onclick="clearSearchcookieWord()">清空搜索历史</span>';
+            $("#history").append(dom);
+            //刷新展开
+            countmore();
+        } else {
+            console.log("搜索历史词汇错误。");
+        }
+    }
+
+
+    function clearSearchcookieWord() {
+        var msg = confirm("您确定清空搜索历史吗？");
+        if (msg) {
+            $.ajax({
+                type: "post",
+                url: "clearSearchWordCookie",
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "true") {
+                        $("#history").hide();
+                        $("#history").html("");
+                    }
+                }
+            });
+        }
+    }
+
+    function searchcookieWordPlugin() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "cookieWord?&wordMaxLength=23",
+            dataType: "json",
+            success: function (data) {
+                searchcookieWord(data);
+            }
+        });
+    }
+
+</script></div>
+</div>
+<div class="footerbox"
+        
+>
+
+    <div class="footer clearfix"  style="display:block;bottom:0;left:0;width:100%;box-sizing:border-box; background-color: #fafafa" >
+        <div class="container" >
+            <span class="fl" style="width: 100%;text-align: center; margin-top: 35px; margin-bottom: 15px;line-height: 20px;">
+                
+
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div class="gotoTop"><a href="javascript:void(0);"></a></div>
+
+<script type="text/javascript">
+    zcTabName = 'all'
+
+    $(function () {
+        initPubProperty('', '000000', 'all',
+            '户口', {
+                'XLSX': 'EXCEL',
+                'XLS': 'EXCEL',
+                'ZIP': 'RAR',
+                'PDF': 'PDF',
+                'DOCX': 'WORD',
+                'RAR': 'RAR',
+                'DOC': 'WORD',
+                'TXT': 'TXT',
+                'PPTX': 'PPT',
+                'PPT': 'PPT'
+            }, 1, 10, 1, '', '',
+            '', '', 0, '%E6%88%B7%E5%8F%A3',
+            0, 0, 10, 0, 0,
+            '',1
+        );
+
+
+
+        var totlePage = parseInt('81'.replace(',', ''));
+        searchPagination('Pagination', totlePage, 1, 20);
+
+        connectorPlugin();
+
+
+
+
+        $.cookie("toolsStatus", 1)
+
+
+
+
+            /* 问答 */
+
+
+    });
+</script>
+
+<div style="position: absolute;bottom: 0;width: 100%;">
+    
+</div>
+</body>
+</html>
